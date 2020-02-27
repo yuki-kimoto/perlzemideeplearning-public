@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
 <title>Perlで学ぶディープラーニング入門</title>
-<meta name="description" content="Perlで学ぶディープラーニング入門">
+<meta name="description" content="Perlで学ぶディープラーニング入門です。">
   </head>
   <body>
     <div class="container">
@@ -29,95 +29,84 @@
 
   </div>
   <div class="middle">
-    <h2><a href="/">Perlで学ぶディープラーニング入門</a></h2>
+    <h2><a href="/">Perlで学ぶディープラーニング入門 - ライブラリを使わずにディープラーニングを基礎から学ぼう</a></h2>
 <p>
-  Perlで学ぶディープラーニング入門
+  Perlで学ぶディープラーニング入門です。
 </p>
-<h3>Create web site</h3>
+<h3>ディープラーニングとは何か?</h3>
 <p>
-  Create web site by new command.
+  ディープラーニングは、機械学習の一つの分野です。
 </p>
-<pre>
-giblog new mysite
-</pre>
 <p>
-  Other prototypes is also available.
+  機械学習では、入力から正しい出力を得られるように、パラメーターを調整します。
 </p>
-<pre>
-giblog new_website mysite
-giblog new_blog mysite
-</pre>
 <p>
-  After creating web site, change directory to mysite
+  たとえば、入力が「人物の写真」だとして、この人は「眼鏡をかけている」「眼鏡をかけていない」というのが出力です。パターン認識と呼ばれる基本的な分野です。
 </p>
-<pre>
-cd mysite
-</pre>
-<h3>Add new entry</h3>
 <p>
-  Add new entry by add command.
+  眼鏡をかけているかどうかの正答率を上昇させていくことが、機械学習の目標です。
+</p>
+<p>
+  ディープラーニングは、機械学習の中でも、人間の神経伝達の仕組みを模倣した、ニューラルネットワークを利用した機械学習です。
+</p>
+<p>
+  ディープラーニングは、ニューラルネットワークの中で、深層学習と呼ばれ、複数の入力と複数の出力を、多段階に連続的につなぎ、最終的な出力を得る方法です。
 </p>
 <pre>
-giblog add
-</pre>
-<h3>Build</h3>
-<p>
-  Build web site.
-</p>
-<pre>
-giblog build
-</pre>
-<p>
-  If you want to customize build process, you open lib/Giblog/Command/Build.pm and edit run subroutine.
-</p>
-<h3>Serve</h3>
-<p>
-  You can serve your web site by morbo command if you have Mojolicious.
-</p>
-<pre>
-morbo serve.pl
+人物の写真
+↓
+(x1, x2, x3, x4)
+↓
+(y1, y2, y3, y4, y5)
+↓
+(z1, z2, z3)
+↓
+(眼鏡をかけている、眼鏡をかけていない)
 </pre>
 <p>
-  build command is automatically executed after editting files in templates directory.
+  実際は、x1～xnまでは、もっと長いです。y1～ykまでももっと長いです。xの個数とyの個数は異なっても構いませんし、一般的には、異なるようにします。
 </p>
-<h3>Examples</h3>
 <p>
-  Some examples.
+  また、段数は、この例では、x, y, zですが、これも、もっと長くなります。
 </p>
-<blockquote>
-  This is a quote.
-</blockquote>
-<div>
-  Hello
-</div>
-<h4>Sub header</h4>
-<pre>
-&lt;&gt;&lt;&gt;&lt;&gt;
-</pre>
-<pre>
-1 &gt; 2;
-1 &lt; 3;
-1 &amp; 3;
-</pre>
-<ul>
-  <li>Item1</li>
-  <li>Item2</li>
-  <li>Item3</li>
-</ul>
-<table>
-  <tr>
-    <th>Head1</th><th>Head2</th>
-  </tr>
-  <tr>
-    <td>Item1</td><td>Item2</td>
-  </tr>
-</table>
 <p>
-  <a href="https://github.com/yuki-kimoto/giblog">Giblog</a>
+  入力から、複数入力と複数出力を多段につなげていって、出力を得るというところがポイントです。
 </p>
-<div>
-  <img src="/images/giblog-logo.png">
-</div>
+<h3>数学の言葉をまったく使わないで解説</h3>
+<p>
+  Perlで学ぶディープラーニング入門では、数学の言葉をまったく使わないで解説します。
+</p>
+<p>
+  「えっ、そんなことができるの?」
+</p>
+<p>
+  でも、よく考えてください。
+</p>
+<p>
+  「中身、全部ソースコードじゃないですか!!!」。
+</p>
+<p>
+  「数学はわからなくっても、コードは読めるはず!!!」
+</p>
+<p>
+  やってみてからのお楽しみ。
+</p>
+<h3>ライブラリ使ったらいいんじゃないの?</h3>
+<p>
+  僕は、ディープラーニングを実現するための本質は、大量のデータ量をWebから取得することと、電気代を減らせることにかかっていると考えています。
+</p>
+<p>
+  そもそも、この2本がなければ、ディープラーニングは、底に穴が開いているようなものです。
+</p>
+<p>
+  特定のアプリケーション用にディープラーニングを最適化するために、ディープラーニングの仕組みそのものを理解して、プログラミングが書ける必要があると考えています。
+</p>
+<p>
+  汎用的なライブラリは、計算資源の利用効率を最適化してくれないのです。
+</p>
+<p>
+  電気代を、クラウドコンピューター事業者に吸い込まれて「はい。おしまい。」それじゃ、悲しいですよね。
+</p>
 
   </div>
   <div class="bottom">
