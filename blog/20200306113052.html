@@ -3,8 +3,8 @@
   <head>
     <!-- meta -->
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-<link rel="icon" type="image/x-icon" href="/images/giblog-logo.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
 <title>出力層における計算 - PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</title>
@@ -13,12 +13,9 @@
   <body>
     <div class="container">
       <div class="header">
-        <!-- header -->
-<div class="main">
-  <h1>
-    <a href="/">PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</a>
-  </h1>
-</div>
+        <h1>
+  <a href="/">PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</a>
+</h1>
 
       </div>
       <div class="main">
@@ -35,6 +32,10 @@
 </p>
 <h3>パターン認識における出力層</h3>
 <p>
+  パターン認識における出力層の計算についての解説です。
+</p>
+<h4>パターン認識(分類問題)における期待される最終出力</h4>
+<p>
   パターン認識(分類問題)における出力層の最終の期待される正しい出力は「(1, 0)」「(0, 1)」のようになります。
 </p>
 <p>
@@ -46,6 +47,7 @@
 <p>
   犬、猫、豚のように2種類以上の分類でもかまいません。犬であるという正しい出力結果は「(1, 0, 0)」、猫であるという正しい出力結果は「(0, 1, 0」」、豚であるという正しい出力結果は「0, 0, 1)」であると考えます。
 </p>
+<h4>ReLU関数の出力をそのまま利用</h4>
 <p>
   このような最終出力を計算するためいに、特別な出力用の関数が必要だと思われがちですが、パターン認識の場合は、ReLU関数の出力をそのまま利用できます。ですから、特別に何かをする必要はありません。
 </p>
