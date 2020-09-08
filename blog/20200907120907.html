@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>MINIST画像情報を読み込む - PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</title>
+<meta name="description" content="MINIST画像情報をPerlで読み込むサンプルプログラムです。MINISTは、ディープラーニングで利用できる画像のサンプルです。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20200907120907.html">MINIST画像情報を読み込む</a></h2>
+<p>
+  MINIST画像情報をPerlで読み込むサンプルプログラムです。MINISTは、ディープラーニングで利用できる画像のサンプルです。
+</p>
+<p>
+  <a href="http://yann.lecun.com/exdb/mnist/">THE MNIST DATABASE of handwritten digits</a>を読み込むサンプルです。
+</p>
+<pre>
+use strict;
+use warnings;
+use FindBin;
+
+# MINIST画像情報を読み込む
+my $minist_image_file = "$FindBin::Bin/data/train-images-idx3-ubyte";
+
+open my $minist_image_fh, '&lt;', $minist_image_file
+  or die "Can't open file $minist_image_file: $!";
+
+# マジックナンバー
+my $image_buffer;
+read($minist_image_fh, $image_buffer, 4);
+my $magic_number = unpack('N1', $image_buffer);
+if ($magic_number != 0x00000803) {
+  die "Invalid magic number expected " . 0x00000803 . "actual $magic_number";
+}
+
+# 画像数
+read($minist_image_fh, $image_buffer, 4);
+my $items_count = unpack('N1', $image_buffer);
+
+# 画像の行ピクセル数
+read($minist_image_fh, $image_buffer, 4);
+my $rows_count = unpack('N1', $image_buffer);
+
+# 画像の列ピクセル数
+read($minist_image_fh, $image_buffer, 4);
+my $columns_count = unpack('N1', $image_buffer);
+
+# 画像の読み込み
+my $image_data;
+my $all_images_length = $items_count * $rows_count * $columns_count;
+my $read_length = read $minist_image_fh, $image_data, $all_images_length;
+unless ($read_length == $all_images_length) {
+  die "Can't read all images";
+}
+
+# 画像情報
+my $image_info = {};
+$image_info-&gt;{items_count} = $items_count;
+$image_info-&gt;{rows_count} = $rows_count;
+$image_info-&gt;{columns_count} = $columns_count;
+$image_info-&gt;{data} = $image_data;
+</pre>
+<h3>MINIST画像情報を読み込むプログラムの簡易解説</h3>
+<p>
+  「data」以下に「train-images-idx3-ubyte」を配置します。
+</p>
+<p>
+  ファイルをオープンしてread関数で読み込んでいきます。
+</p>
+<p>
+  マジックナンバーのチェックを行います。ビッグエンディアンの32bit整数なので、unpackに「N1」を指定します。
+</p>
+<p>
+  画像数を取得します。ビッグエンディアンの32bit整数なので、unpackに「N1」を指定します。
+</p>
+<p>
+  画像の行ピクセル数を取得します。ビッグエンディアンの32bit整数なので、unpackに「N1」を指定します。
+</p>
+<p>
+  画像の列ピクセル数を取得します。ビッグエンディアンの32bit整数なので、unpackに「N1」を指定します。
+</p>
+<p>
+  MINIST画像情報では、すべての画像データで、行ピクセル数と列ピクセル数は共通です。
+</p>
+<p>
+  すべての画像を読み込みます。
+</p>
+<p>
+  訓練用の画像情報である「train-images-idx3-ubyte」を読み込んでいますが、検証用の画像情報「t10k-images-idx3-ubyte」も同様の方法で読み込めます。
+</p>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
