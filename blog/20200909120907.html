@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>MINISTラベル情報を読み込む - PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</title>
+<meta name="description" content="MINISTラベル情報をPerlで読み込むサンプルプログラムです。MINISTは、ディープラーニングで利用できる画像のサンプルです。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20200909120907.html">MINISTラベル情報を読み込む</a></h2>
+<p>
+  MINISTラベル情報をPerlで読み込むサンプルプログラムです。MINISTは、ディープラーニングで利用できる画像のサンプルです。
+</p>
+<p>
+  <a href="http://yann.lecun.com/exdb/mnist/">THE MNIST DATABASE of handwritten digits</a>を読み込むサンプルです。
+</p>
+<pre>
+use strict;
+use warnings;
+use FindBin;
+
+# MINISTラベル情報を読み込む
+my $minist_label_file = "$FindBin::Bin/data/train-labels-idx1-ubyte";
+
+open my $minist_label_fh, '&lt;', $minist_label_file
+  or die "Can't open file $minist_label_file: $!";
+
+# マジックナンバー
+my $label_buffer;
+read($minist_label_fh, $label_buffer, 4);
+my $magic_number = unpack('N1', $label_buffer);
+if ($magic_number != 0x00000801) {
+  die "Invalid magic number expected " . 0x00000801 . "actual $magic_number";
+}
+
+# ラベル数
+read($minist_label_fh, $label_buffer, 4);
+my $items_count = unpack('N1', $label_buffer);
+
+# ラベルの読み込み
+my $label_numbers = [];
+for (my $i = 0; $i &lt; $items_count; $i++) {
+  read $minist_label_fh, $label_buffer, 1;
+  my $label_number = unpack('C1', $label_buffer);
+  push @$label_numbers, $label_number;
+}
+
+# ラベル情報
+my $label_info = {};
+$label_info-&gt;{items_count} = $items_count;
+$label_info-&gt;{label_numbers} = $label_numbers;
+</pre>
+<h3>MINISTラベル情報を読み込むプログラムの簡易解説</h3>
+<p>
+  「data」以下に「train-labels-idx1-ubyte」を配置します。
+</p>
+<p>
+  ファイルをオープンしてread関数で読み込んでいきます。
+</p>
+<p>
+  マジックナンバーのチェックを行います。ビッグエンディアンの32bit整数なので、unpackに「N1」を指定します。
+</p>
+<p>
+  ラベル数を取得します。ビッグエンディアンの32bit整数なので、unpackに「N1」を指定します。
+</p>
+<p>
+  ラベルを読み込んでいきます。ラベルの一つの情報は符号なし8bit整数なので「C1」を指定します。
+</p>
+<p>
+  訓練用のラベル情報である「train-labels-idx1-ubyte」を読み込んでいますが、検証用のラベル情報「t10k-labels-idx1-ubyte」も同様の方法で読み込めます。
+</p>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
