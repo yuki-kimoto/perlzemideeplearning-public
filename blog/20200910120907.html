@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>二乗和誤差を求める - 損失関数 - PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</title>
+<meta name="description" content="二乗和誤差を求める関数をPerlで書いてみましょう。平均二乗誤差は、出力結果と期待される出力結果(正しい答え)の誤差を計算するために使用する損失関数の一つです。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20200910120907.html">二乗和誤差を求める - 損失関数</a></h2>
+<p>
+  二乗和誤差を求める関数をPerlで書いてみましょう。平均二乗誤差は、出力結果と期待される出力結果(正しい答え)の誤差を計算するために使用する<a href="/blog/20200901120907.html">損失関数</a>の一つです。
+</p>
+<pre>
+use strict;
+use warnings;
+
+# 二乗和誤差
+sub sum_of_square_error {
+  my ($outputs, $desired_outputs) = @_;
+  
+  if (@$outputs != @$desired_outputs) {
+    die "Outputs length is different from Desired length";
+  }
+  
+  my $total_pow2 = 0;
+  for (my $i = 0; $i &lt; @$outputs; $i++) {
+    $total_pow2 += ($outputs-&gt;[$i] - $desired_outputs-&gt;[$i]) ** 2;
+  }
+  my $mean_square_error = 0.5 * $total_pow2;
+  
+  return $mean_square_error;
+}
+
+my $outputs = [0.7, 0.2, 0.1];
+my $desired_outputs = [1, 0, 0];
+my $sum_of_square_error = sum_of_square_error($outputs, $desired_outputs);
+</pre>
+<p>
+  ディープラーニングでは、損失関数で求められた誤差が小さくなるように、重みとバイアスのパラメーターが調整されていきます。
+</p>
+<p>
+  一般には、損失関数として、微分の形が難しく計算が複雑になるので二乗和誤差より、交差エントロピー誤差を使うほうが、望ましいようです。
+</p>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
