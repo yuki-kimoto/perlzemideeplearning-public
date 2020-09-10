@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
 <title>二乗和誤差を求める - 損失関数 - PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</title>
-<meta name="description" content="二乗和誤差を求める関数をPerlで書いてみましょう。平均二乗誤差は、出力結果と期待される出力結果(正しい答え)の誤差を計算するために使用する損失関数の一つです。">
+<meta name="description" content="二乗和誤差を求める関数をPerlで書いてみましょう。二乗和誤差は、出力結果と期待される出力結果(正しい答え)の誤差を計算するために使用する損失関数の一つです。">
   </head>
   <body>
     <div class="container">
@@ -28,7 +28,7 @@
   <div class="middle">
     <h2><a href="/blog/20200910120907.html">二乗和誤差を求める - 損失関数</a></h2>
 <p>
-  二乗和誤差を求める関数をPerlで書いてみましょう。平均二乗誤差は、出力結果と期待される出力結果(正しい答え)の誤差を計算するために使用する<a href="/blog/20200901120907.html">損失関数</a>の一つです。
+  二乗和誤差を求める関数をPerlで書いてみましょう。二乗和誤差は、出力結果と期待される出力結果(正しい答え)の誤差を計算するために使用する<a href="/blog/20200901120907.html">損失関数</a>の一つです。
 </p>
 <pre>
 use strict;
@@ -46,9 +46,9 @@ sub sum_of_square_error {
   for (my $i = 0; $i &lt; @$outputs; $i++) {
     $total_pow2 += ($outputs-&gt;[$i] - $desired_outputs-&gt;[$i]) ** 2;
   }
-  my $mean_square_error = 0.5 * $total_pow2;
+  my $sum_of_square_error = 0.5 * $total_pow2;
   
-  return $mean_square_error;
+  return $sum_of_square_error;
 }
 
 my $outputs = [0.7, 0.2, 0.1];
@@ -59,7 +59,7 @@ my $sum_of_square_error = sum_of_square_error($outputs, $desired_outputs);
   ディープラーニングでは、損失関数で求められた誤差が小さくなるように、重みとバイアスのパラメーターが調整されていきます。
 </p>
 <p>
-  一般には、損失関数として、微分の形が難しく計算が複雑になるので二乗和誤差より、交差エントロピー誤差を使うほうが、望ましいようです。
+  パターン認識の問題における損失関数としては、偏微分の形が難しく計算が複雑になるので二乗和誤差より、<a href="/blog/20200901120907.html">交差エントロピー誤差</a>を使うほうが、望ましいようです。
 </p>
 
   </div>
