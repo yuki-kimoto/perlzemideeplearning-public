@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>ReLU関数 - 活性化関数 - PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</title>
+<meta name="description" content="ReLU関数をPerlで書いてみます。ReLU関数は活性化関数の一つです。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">PerlとSPVMで学ぶディープラーニング入門 - 国産AI 日本の期待の星プロジェクト</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20200911102242.html">ReLU関数 - 活性化関数</a></h2>
+<p>
+  ReLU関数をPerlで書いてみます。ReLU関数は<a href="/blog/20200902120907.html">活性化関数</a>の一つです。
+</p>
+<p>
+  ReLU関数は、値が0より大きい場合はその値を、0以下の場合は0を返す関数です。
+</p>
+<pre>
+# ReLU関数
+sub relu {
+  my ($z) = @_;
+  
+  my $relu = $z &gt; 0 ? $z : 0;
+  
+  return $relu;
+}
+
+my $value1 = 0.7;
+my $relu1 = relu($value1);
+
+print "$relu1\n";
+
+my $value2 = -0.4;
+my $relu2 = relu($value2);
+
+print "$relu2\n";
+</pre>
+<p>
+  ReLU関数は、ロジックが簡単で、計算量が少なく、効果が高い活性化関数として知られています。
+</p>
+<p>
+  ReLU関数は隠れ層における活性化関数として利用されますが、出力層で出力を作成する場合にも利用することができます。
+</p>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
