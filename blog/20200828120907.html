@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>ベクトルの差を求める - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="ディープラーニングの計算で必要なベクトルの差をPerlで求めましょう。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">Perlで学ぶディープラーニング入門</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20200828120907.html">ベクトルの差を求める</a></h2>
+<p>
+  ディープラーニングの計算で必要なベクトルの差をPerlで求めましょう。
+</p>
+<p>
+  Perlでは、ベクトルは配列で表現します。ベクトルと聞くと、ソフトウェアエンジニアは頭が痛くなるんじゃないかと思いますが、配列と言ってもらえると「なんだぁ～」ってなりますよね。
+</p>
+<p>
+  ベクトルの差を求めるPerlのプログラムです。
+</p>
+<pre>
+use strict;
+use warnings;
+
+# ベクトルの差
+sub vec_sub {
+  my ($vec1, $vec2) = @_;
+
+  my $vec_sub = [];
+
+  for (my $i = 0; $i &lt; @$vec1; $i++) {
+    $vec_sub-&gt;[$i] = $vec1-&gt;[$i] - $vec2-&gt;[$i];
+  }
+  
+  return $vec_sub;
+}
+
+my $vec1 = [1, 2, 3];
+my $vec2 = [4, 5, 6];
+
+# ベクトルの差
+my $vec_sub = vec_sub($vec1, $vec2);
+
+# -3 -3 -3
+print "@$vec_sub\n";
+</pre>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
