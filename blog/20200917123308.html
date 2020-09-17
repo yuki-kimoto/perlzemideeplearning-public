@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>転置行列を求める - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="転置行列を求めてみましょう。転置行列とは、行と列が入れ替わった行列のことです。転置行列の計算は、バックプロパゲーションで必要になります。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">Perlで学ぶディープラーニング入門</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20200917123308.html">転置行列を求める</a></h2>
+<p>
+  転置行列を求めてみましょう。転置行列とは、行と列が入れ替わった行列のことです。転置行列の計算は、バックプロパゲーションで必要になります。
+</p>
+<p>
+  行列は<a href="/blog/20200914103640.html">列優先の行列</a>だと考えてください。
+</p>
+<pre>
+# 数学の行列表現
+# 3行2列の行列
+# 1 4
+# 2 5
+# 3 6
+
+# 列優先でのデータのもちかた
+my $values = [1, 2, 3, 4, 5, 6];
+my $rows_length = 3;
+my $columns_length = 2;
+</pre>
+<p>
+  この行列を転置するとすると以下のようになります。行と列が入れ替わります。
+</p>
+<pre>
+# 転置行列
+
+# 数学の行列表現
+# 2行3列の行列
+# 1 2 3
+# 4 5 6
+
+# 列優先でのデータのもちかた
+my $values = [1, 4, 2, 5, 3, 6];
+my $rows_length = 2;
+my $columns_length = 3;
+</pre>
+<h3>転置行列を求めるPerlプログラム</h3>
+<p>
+  転置行列を求めるPerlプログラムを書いてみます。
+</p>
+<pre>
+use strict;
+use warnings;
+
+sub transpose {
+  my ($mat) = @_;
+  
+  my $rows_length = $mat-&gt;{rows_length};
+  my $columns_length = $mat-&gt;{columns_length};
+  my $length = $rows_length * $columns_length;
+  
+  my $mat_trans ={};
+  $mat_trans-&gt;{rows_length} = $columns_length;
+  $mat_trans-&gt;{columns_length} = $rows_length;
+  
+  my $values = $mat-&gt;{values};
+  my $mat_trans_values = [];
+  
+  for (my $row_index = 0; $row_index &lt; $rows_length; $row_index++) {
+    for (my $column_index = 0; $column_index &lt; $columns_length; $column_index++) {
+      $mat_trans_values-&gt;[$row_index * $columns_length + $column_index] = $values-&gt;[$column_index * $rows_length+ $row_index];
+    }
+  }
+  $mat_trans-&gt;{values} = $mat_trans_values;
+  
+  return $mat_trans;
+}
+
+my $mat = {
+  values =&gt; [1, 2, 3, 4, 5, 6],
+  rows_length =&gt; 3,
+  columns_length =&gt; 2,
+};
+
+my $mat_trans = transpose($mat);
+
+# Row:2, Column:3, Values:1 4 2 5 3 6
+print "Row:$mat_trans-&gt;{rows_length}, Column:$mat_trans-&gt;{columns_length}, Values:@{$mat_trans-&gt;{values}}\n";
+</pre>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
