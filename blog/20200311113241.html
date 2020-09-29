@@ -7,8 +7,8 @@
 <link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
-<title>各層のパラメーターの初期値の設定方法 - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
-<meta name="description" content="各層のパラメーターの初期値の設定方法方法です。">
+<title>各層の重みとバイアスのパラメーターの初期値の設定方法 - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="各層の重みとバイアスのパラメーターの初期値の設定方法方法です。">
   </head>
   <body>
     <div class="container">
@@ -26,9 +26,9 @@
 
   </div>
   <div class="middle">
-    <h2><a href="/blog/20200311113241.html">各層のパラメーターの初期値の設定方法</a></h2>
+    <h2><a href="/blog/20200311113241.html">各層の重みとバイアスのパラメーターの初期値の設定方法</a></h2>
 <p>
-  各層のパラメーターの初期値の設定方法方法です。
+  各層の重みとバイアスのパラメーターの初期値の設定方法方法です。
 </p>
 <p>
   <a href="/blog/20200302113052.html">中間層における計算 - m個の入力をn個の出力に変換する</a>では、各層のパラメータに適当な値を使いました。
@@ -353,6 +353,13 @@ $VAR1 = [
         ];
 (1.99955473915037, 0.979640425704874, 0)
 </pre>
+<h4>重みの初期値 - Xivierの初期値</h4>
+<p>
+  Heの初期値以外に、Xivierの初期値と呼ばれる、平均0、標準偏差「1/sqrt(n)」である正規分布から重みをランダムに生成する方法があります。
+</p>
+<p>
+  活性化関数がReLU以外の場合に、利用されるようです。
+</p>
 
   </div>
   <div class="bottom">
