@@ -47,9 +47,11 @@
 # 3 6
 
 # 列優先でのデータのもちかた
-my $values = [1, 2, 3, 4, 5, 6];
-my $rows_length = 3;
-my $columns_length = 2;
+my $mat = {
+  values =&gt; [1, 2, 3, 4, 5, 6],
+  rows_length =&gt; 3,
+  columns_length =&gt; 2,
+};
 </pre>
 <p>
   列優先にしておく理由は、BLASという行列計算ライブラリを使う場合と、整合性をとるためです。
@@ -65,45 +67,72 @@ my $columns_length = 2;
 use strict;
 use warnings;
 
+# 行列の積を求める
+sub mat_mul {
+  my ($mat1, $mat2) = @_;
+  
+  my $mat1_rows_length = $mat1-&gt;{rows_length};
+  my $mat1_columns_length = $mat1-&gt;{columns_length};
+  my $mat1_values = $mat1-&gt;{values};
+  
+  my $mat2_rows_length = $mat2-&gt;{rows_length};
+  my $mat2_columns_length = $mat2-&gt;{columns_length};
+  my $mat2_values = $mat2-&gt;{values};
+  
+  # 行列の積の計算
+  my $mat_out_values = [];
+  for(my $row = 0; $row &lt; $mat1_rows_length; $row++) {
+    for(my $col = 0; $col &lt; $mat2_columns_length; $col++) {
+      for(my $incol = 0; $incol &lt; $mat1_columns_length; $incol++) {
+        $mat_out_values-&gt;[$row + $col * $mat1_rows_length]
+         += $mat1_values-&gt;[$row + $incol * $mat1_rows_length] * $mat2_values-&gt;[$incol + $col * $mat2_rows_length];
+      }
+    }
+  }
+  
+  my $mat_out = {
+    rows_length =&gt; $mat1_rows_length,
+    columns_length =&gt; $mat2_columns_length,
+    values =&gt; $mat_out_values,
+  };
+  
+  return $mat_out;
+}
+
 # 重み(3行2列の行列)
 # 1 4
 # 2 5
 # 3 6
-my $weights = [1, 2, 3, 4, 5, 6];
-my $weights_rows_length = 3;
-my $weights_columns_length = 2;
+my $mat1 = {
+  values =&gt; [1, 2, 3, 4, 5, 6],
+  rows_length =&gt; 3,
+  columns_length =&gt; 2,
+};
 
 # 入力ベクトル(2行1列の行列)
-# 7
-# 8
-my $inputs = [7, 8];
-my $inputs_rows_length = 2;
-my $inputs_columns_length = 1;
+# 7 9
+# 8 10
+my $mat2 = {
+  values =&gt; [7, 8, 9, 10],
+  rows_length =&gt; 2,
+  columns_length =&gt; 2,
+};
 
 # 計算方法
-# 1 * 7 + 4 * 8
-# 2 * 7 + 5 * 8
-# 3 * 7 + 6 * 8
-my $outputs = [];
+# 1 * 7 + 4 * 8    1 * 9 + 4 * 10
+# 2 * 7 + 5 * 8    2 * 9 + 5 * 10 
+# 3 * 7 + 6 * 8    3 * 9 + 6 * 10
+my $outputs_mul = mat_mul($mat1, $mat2);
 
-# 行列の積の計算
-for(my $row = 0; $row &lt; $weights_rows_length; $row++) {
-  for(my $col = 0; $col &lt; $inputs_columns_length; $col++) {
-    for(my $incol = 0; $incol &lt; $weights_columns_length; $incol++) {
-      $outputs-&gt;[$row + $col * $inputs_rows_length]
-       += $weights-&gt;[$row + $incol * $weights_rows_length] * $inputs-&gt;[$incol + $col * $inputs_rows_length];
-    }
-  }
-}
-
-# 39 54 69
-print "@$outputs\n";
+# rows_length =&gt; 3, columns_length =&gt; 2, values : [39, 54, 69, 49, 68, 87]
+use Data::Dumper;
+print Dumper $outputs_mul;
 </pre>
 <p>
   Perlでの行列の積の計算には、C言語で書かれた行列の積の計算アルゴリズムがありましたので、それを流用しました。
 </p>
 <p>
-  行列の積の計算は、一般には、3重ループになります。ただし、入力ベクトルは、2行1列の行列ですので、この場合は、二重ループになります。
+  行列の積の計算は、一般には、3重ループになります。
 </p>
 
   </div>

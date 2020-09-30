@@ -38,9 +38,11 @@
 # 3 6
 
 # 列優先でのデータのもちかた
-my $values = [1, 2, 3, 4, 5, 6];
-my $rows_length = 3;
-my $columns_length = 2;
+my $mat = {
+  values =&gt; [1, 2, 3, 4, 5, 6],
+  rows_length =&gt; 3,
+  columns_length =&gt; 2,
+};
 </pre>
 <p>
   行列の差を求める計算は、配列の行列の各要素の差を求める計算を行うだけです。
