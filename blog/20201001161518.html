@@ -7,8 +7,8 @@
 <link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
-<title>ReLU関数 - 活性化関数 - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
-<meta name="description" content="ReLU関数をPerlで書いてみます。ReLU関数は活性化関数の一つです。">
+<title>ReLU関数の導関数 - 活性化関数の導関数 - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="ReLU関数の導関数をPerlで書いてみます。">
   </head>
   <body>
     <div class="container">
@@ -26,49 +26,35 @@
 
   </div>
   <div class="middle">
-    <h2><a href="/blog/20200911102242.html">ReLU関数 - 活性化関数</a></h2>
+    <h2><a href="/blog/20201001161518.html">ReLU関数の導関数 - 活性化関数の導関数</a></h2>
 <p>
-  ReLU関数をPerlで書いてみます。ReLU関数は<a href="/blog/20200902120907.html">活性化関数</a>の一つです。
+  <a href="/blog/20200911102242.html">ReLU関数</a>の<a href="/blog/20200919123308.html">導関数</a>をPerlで書いてみます。
 </p>
 <p>
-  ReLU関数は、値が0より大きい場合はその値を、0以下の場合は0を返す関数です。
+  ReLU関数の導関数をPerlで書いてみます。ReLU関数の導関数は、バックプロパゲーションに利用します。
 </p>
 <pre>
 use strict;
 use warnings;
 
-# ReLU関数
-sub relu {
+sub relu_derivative {
   my ($x) = @_;
   
-  my $relu = $x * ($x &gt; 0.0);
+  my $relu_derivative = 1 * ($x &gt; 0.0);
   
-  return $relu;
+  return $relu_derivative;
 }
 
 my $value1 = 0.7;
-my $relu1 = relu($value1);
+my $relu_derivative1 = relu_derivative($value1);
 
-print "$relu1\n";
+print "$relu_derivative1\n";
 
 my $value2 = -0.4;
-my $relu2 = relu($value2);
+my $relu_derivative2 = relu_derivative($value2);
 
-print "$relu2\n";
+print "$relu_derivative2\n";
 </pre>
-<p>
-  ReLU関数は、ロジックが簡単で、計算量が少なく、効果が高い活性化関数として知られています。
-</p>
-<p>
-  ReLU関数は隠れ層における活性化関数として利用されますが、出力層で出力を作成する場合にも利用することができます。
-</p>
-<h3>ReLU関数の導関数</h3>
-<p>
-  ReLU関数の導関数については以下を参考にしてください。
-</p>
-<ul>
-  <li><a href="/blog/20201001161518.html">ReLU関数の導関数</a></li>
-</ul>
 
   </div>
   <div class="bottom">
