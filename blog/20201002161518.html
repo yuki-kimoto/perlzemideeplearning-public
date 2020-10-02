@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>softmax関数 - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="softmax関数は、出力を合計が100%の確率分布に変換してくれる関数です。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">Perlで学ぶディープラーニング入門</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20201002161518.html">softmax関数</a></h2>
+<p>
+  softmax関数は、出力を合計が100%の確率分布に変換してくれる関数です。
+</p>
+<pre>
+use strict;
+use warnings;
+
+# softmax関数
+sub softmax {
+  my ($nums) = @_;
+  
+  my $exp_total = 0;
+  for (my $i = 0; $i &lt; @$nums; $i++) {
+    $exp_total += exp($nums-&gt;[$i]);
+  }
+  
+  my $nums_out = [];
+  for (my $i = 0; $i &lt; @$nums; $i++) {
+    $nums_out-&gt;[$i] = exp($nums-&gt;[$i]) / $exp_total;
+  }
+  
+  return $nums_out;
+}
+
+my $outputs = [0.07, 0.14, 0.24];
+
+my $softmax_outputs = softmax($outputs);
+
+# 0.306954386271124 0.329211090547647 0.363834523181229
+print "@$softmax_outputs\n";
+</pre>
+<p>
+  もし出力に0が含まれていた場合でも、softmax関数の出力は、計算可能です。
+</p>
+<pre>
+my $outputs = [0, 0.14, 0.24];
+
+my $softmax_outputs = softmax($outputs);
+
+# 0.292267512114761 0.336187661442797 0.371544826442441
+print "@$softmax_outputs\n";
+</pre>
+<p>
+  <a href="/blog/20200901120907.html">損失関数</a>である<a href="/blog/20200831120907.html">交差エントロピー誤差</a>は、引数の値に0を含んでいる場合に、log(0)となるので、計算不能になりますが、softmax関数を出力層の活性化関数として使うと回避できます。
+</p>
+<h3>softmax関数の導関数</h3>
+<p>
+  softmax関数の導関数は表現が難しいです。
+</p>
+<p>
+  ただし、softmax関数とクロスエントロピー誤差の合成関数の導関数は表現が簡単なので、バックプロパゲーションに使えます。
+</p>
+<ul>
+  <li><a href="/blog/20200927161518.html">softmax関数とクロスエントロピー誤差の合成関数の導関数</a></li>
+</ul>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>

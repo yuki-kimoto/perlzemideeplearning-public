@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>softmax関数とクスエントロピー誤差の合成関数の導関数 - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="softmaxクロスエントロピーの導関数をPerlで記述してみます。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">Perlで学ぶディープラーニング入門</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20200927161518.html">softmax関数とクスエントロピー誤差の合成関数の導関数</a></h2>
+<p>
+  softmaxクロスエントロピーの導関数をPerlで記述してみます。
+</p>
+<p>
+  実は、<a href="/blog/20201002161518.html">softmax関数</a>の<a href="/blog/20200919123308.html">導関数</a>は、そう簡単ではありません。
+</p>
+<p>
+  ただし、softmax関数とクロスエントロピー関数の合成関数の導関数は、簡単に表現できます。
+</p>
+<p>
+  をPerlで書いてみます。
+</p>
+<p>
+  softmax関数の導関数をPerlで書いてみます。softmax関数の導関数は、バックプロパゲーションに利用します。
+</p>
+<pre>
+use strict;
+use warnings;
+
+# softmaxクロスエントロピー誤差の導関数
+sub softmax_cross_entropy_cost_derivative {
+  my ($softmax_outputs, $desired_outputs) = @_;
+  
+  my $length = @$softmax_outputs;
+  
+  my $softmax_cross_entropy_cost_derivative = [];
+  for (my $i = 0; $i &lt; @$vec_a; $i++) {
+    $softmax_cross_entropy_cost_derivative-&gt;[$i] = ($softmax_outputs-&gt;[$i] - $desired_outputs-&gt;[$i]) / $length;
+  }
+  
+  return $softmax_cross_entropy_cost_derivative;
+}
+</pre>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
