@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
 <title>softmax関数とクスエントロピー誤差の合成関数の導関数 - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
-<meta name="description" content="softmaxクロスエントロピーの導関数をPerlで記述してみます。">
+<meta name="description" content="softmax関数とクロスエントロピー関数の合成関数の導関数をPerlで記述してみます。">
   </head>
   <body>
     <div class="container">
@@ -28,19 +28,16 @@
   <div class="middle">
     <h2><a href="/blog/20200927161518.html">softmax関数とクスエントロピー誤差の合成関数の導関数</a></h2>
 <p>
-  softmaxクロスエントロピーの導関数をPerlで記述してみます。
+  softmax関数とクロスエントロピー関数の合成関数の導関数をPerlで記述してみます。
 </p>
 <p>
   実は、<a href="/blog/20201002161518.html">softmax関数</a>の<a href="/blog/20200919123308.html">導関数</a>は、そう簡単ではありません。
 </p>
 <p>
-  ただし、softmax関数とクロスエントロピー関数の合成関数の導関数は、簡単に表現できます。
+  ですが、softmax関数とクロスエントロピー関数の合成関数の導関数は簡単な表現になります。
 </p>
 <p>
-  をPerlで書いてみます。
-</p>
-<p>
-  softmax関数の導関数をPerlで書いてみます。softmax関数の導関数は、バックプロパゲーションに利用します。
+  このため、softmax関数とクスエントロピー誤差の合成関数の導関数を、バックプロパゲーションに利用します。
 </p>
 <pre>
 use strict;
