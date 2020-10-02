@@ -53,7 +53,7 @@ sub softmax_cross_entropy_cost_derivative {
   my $length = @$softmax_outputs;
   
   my $softmax_cross_entropy_cost_derivative = [];
-  for (my $i = 0; $i &lt; @$vec_a; $i++) {
+  for (my $i = 0; $i &lt; @$softmax_outputs; $i++) {
     $softmax_cross_entropy_cost_derivative-&gt;[$i] = ($softmax_outputs-&gt;[$i] - $desired_outputs-&gt;[$i]) / $length;
   }
   
