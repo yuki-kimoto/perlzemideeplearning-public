@@ -7,8 +7,8 @@
 <link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
-<title>試作版: ピュアPerlで書いたMNIST手書き認識ディープラーニング - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
-<meta name="description" content="試作版: ピュアPerlで書いたMNIST手書き認識ディープラーニングを公開します。">
+<title>ピュアPerlで書いたMNIST手書き認識ディープラーニング - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="ピュアPerlで書いたMNIST手書き認識ディープラーニングを公開します。">
   </head>
   <body>
     <div class="container">
@@ -26,9 +26,9 @@
 
   </div>
   <div class="middle">
-    <h2><a href="/blog/20200926161518.html">試作版: ピュアPerlで書いたMNIST手書き認識ディープラーニング</a></h2>
+    <h2><a href="/blog/20200926161518.html">ピュアPerlで書いたMNIST手書き認識ディープラーニング</a></h2>
 <p>
-  試作版: ピュアPerlで書いたMNIST手書き認識ディープラーニングを公開します。
+  ピュアPerlで書いたMNIST手書き認識ディープラーニングを公開します。
 </p>
 <p>
   MNIST手書きデータは、<a href="http://yann.lecun.com/exdb/mnist/">THE MNIST DATABASE of handwritten digits</a>から取得したものをdataディレクトリ以下に配置しています。
@@ -37,16 +37,16 @@
   このディープラーニングのPerlコードは、<a href="https://nnadl-ja.github.io/nnadl_site_ja/index.html">ニューラルネットワークと深層学習</a>のソースコードを参考にしています。
 </p>
 <p>
-  現在このコードは、1回目の訓練で、正答率が25%程度までは上昇しますが、Perlの数値計算の性能が足りていないので、そこから進めることは、難しそうです。
-</p>
-<p>
-  純粋なPerlコードですので、ディープラーニングのアルゴリズムの概要を知るのには、利用できるでしょう。
+  純粋なPerlコードですので、ディープラーニングのアルゴリズムの概要をPerlユーザーが知るのに、活用できるでしょう。
 </p>
 <p>
   特別なライブラリを使用していませんので、if文とfor文と配列の知識があれば、ソースコードを読むことができます。if文とfor文と配列で構成しているので、参考にして、他のプログラミング言語でも、ディープラーニングのロジックを書くことができますよ。
 </p>
 <p>
-  C言語トランスパイラであるSPVMへの部分的なリライトによって、試行錯誤を繰り返して、現実的な速度レベルまで高速化していきます。
+  現在このコードは、Perlの数値計算の性能が足りていないので、パフォーマンス向上が求められます。
+</p>
+<p>
+  C言語トランスパイラである<a href="https://yuki-kimoto.github.io/spvmdoc-public/">SPVM</a>への部分的なリライトによって、試行錯誤を繰り返して、現実的な速度レベルまで高速化していきます。
 </p>
 <pre>
 # network.pl
@@ -380,6 +380,7 @@ sub max_index {
   for (my $i = 0; $i &lt; @$nums; $i++) {
     if ($nums-&gt;[$i] &gt; $max) {
       $max_index = $i;
+      $max = $nums-&gt;[$i];
     }
   }
   
