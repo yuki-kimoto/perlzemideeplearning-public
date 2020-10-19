@@ -7,8 +7,8 @@
 <link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
-<title>ベクトルの差を求める - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
-<meta name="description" content="ディープラーニングの計算で必要なベクトルの差をPerlで求めましょう。">
+<title>tanh関数 - 活性化関数 - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="tanh関数をPerlで書いてみます。tanh関数は活性化関数の一つです。">
   </head>
   <body>
     <div class="container">
@@ -26,42 +26,32 @@
 
   </div>
   <div class="middle">
-    <h2><a href="/blog/20200828120907.html">ベクトルの差を求める</a></h2>
+    <h2><a href="/blog/20201019123741.html">tanh関数 - 活性化関数</a></h2>
 <p>
-  ディープラーニングの計算で必要なベクトルの差をPerlで求めましょう。
+  tanh関数をPerlで書いてみます。tanh関数は<a href="/blog/20200902120907.html">活性化関数</a>の一つです。
 </p>
 <p>
-  Perlでは、ベクトルは配列で表現します。ベクトルと聞くと、ソフトウェアエンジニアは頭が痛くなるんじゃないかと思いますが、配列と言ってもらえると「なんだぁ～」ってなりますよね。
-</p>
-<p>
-  ベクトルの差を求めるPerlのプログラムです。
+  tanh関数は、三角関数の一つです。<a href="https://tutorial.perlzemi.com/blog/20080916122166.html">Math::Trig</a>モジュールの関数として定義されています。
 </p>
 <pre>
 use strict;
 use warnings;
 
-# ベクトルの差
-sub vec_sub {
-  my ($vec1, $vec2) = @_;
+# tanh関数をインポート
+use Math::Trig 'tanh';
 
-  my $vec_sub = [];
+my $tanh = tanh 3;
 
-  for (my $i = 0; $i &lt; @$vec1; $i++) {
-    $vec_sub-&gt;[$i] = $vec1-&gt;[$i] - $vec2-&gt;[$i];
-  }
-  
-  return $vec_sub;
-}
-
-my $vec1 = [1, 2, 3];
-my $vec2 = [4, 5, 6];
-
-# ベクトルの差
-my $vec_sub = vec_sub($vec1, $vec2);
-
-# -3 -3 -3
-print "@$vec_sub\n";
+# 0.995054753686731
+print "$tanh\n";
 </pre>
+<h3>tanh関数の導関数</h3>
+<p>
+  tanh関数の導関数については以下を参考にしてください。
+</p>
+<ul>
+  <li><a href="/blog/20201018123741.html">tanh関数の導関数</a></li>
+</ul>
 
   </div>
   <div class="bottom">
