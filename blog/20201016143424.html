@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>バイアスとは - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="ディープラーニングにおけるバイアスとは、m個の入力をn個の出力に変換する関数の定数項のことをいいます。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">Perlで学ぶディープラーニング入門</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20201016143424.html">バイアスとは</a></h2>
+<p>
+  ディープラーニングにおけるバイアスとは、m個の入力をn個の出力に変換する関数の定数項のことをいいます。
+</p>
+<p>
+  以下は2つの入力を3つの出力に変換する関数です。
+</p>
+<pre>
+use strict;
+use warnings;
+
+sub m_to_n_convert {
+  my ($inputs) = @_;
+  
+  my $outputs = [];
+  
+  # バイアス
+  my $biases = [
+    0.12,
+    0.43,
+    0.16,
+  ];
+  
+  # 重み
+  my $weights_mat = {
+    rows_length =&gt; 3,
+    columns_length =&gt; 2,
+    values =&gt; [
+      0.25,
+      0.58,
+      0.13,
+      0.43,
+      0.98,
+      0.47,
+    ]
+  };
+  my $weights_mat_values = $weights_mat-&gt;{values};
+  
+  # バイアスはm個の入力をn個の出力に変換する関数の定数項
+  $outputs-&gt;[0] = $weights_mat_values-&gt;[0] * $inputs-&gt;[0] + $weights_mat_values-&gt;[3] * $inputs-&gt;[1] + $biases-&gt;[0];
+  $outputs-&gt;[1] = $weights_mat_values-&gt;[1] * $inputs-&gt;[0] + $weights_mat_values-&gt;[4] * $inputs-&gt;[1] + $biases-&gt;[1];
+  $outputs-&gt;[2] = $weights_mat_values-&gt;[2] * $inputs-&gt;[0] + $weights_mat_values-&gt;[5] * $inputs-&gt;[1] + $biases-&gt;[2];
+  
+  return $outputs;
+}
+</pre>
+<p>
+  バイアスの個数は、出力数と同じです。
+</p>
+<h3>バイアスは自動調整されるパラメーター</h3>
+<p>
+  バイアスは、学習アルゴリズムを使って自動調節されるパラメーターです。誤差の指標である<a href="/blog/20200901120907.html">損失関数</a>の値が小さくなるように更新されます。更新には、<a href="/blog/20201017123741.html">勾配降下法</a>などのパラメーター更新アルゴリズムが利用されます。
+</p>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+<h2 style="text-align:center;margin-top:50px;">Perlで学ぶディープラーニング入門のご紹介</h2>
+
+<div style="text-align:center">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/dTKY0kor50A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
