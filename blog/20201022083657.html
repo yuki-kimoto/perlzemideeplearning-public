@@ -31,7 +31,10 @@
   AdamはSGDを改善したパラメーター更新最適化アルゴリズムです。<a href="/blog/20201017123741.html">SGD</a>における学習率の部分が、訓練を行う毎に更新されていくことが特徴です。ひとつ前で行った更新量を、考慮にいれるというところも特徴です。
 </p>
 <p>
-  ひとつのパラメーターを更新する場合におけるAdamのアルゴリズムをPerlで書いてみます。意味については、よくわかりません。<a href="/blog/20201016143424.html">バイアス</a>を更新する場合のサンプルです。<a href="/blog/20201015143424.html">重み</a>の場合も同じです。
+  ひとつのパラメーターを更新する場合におけるAdamのアルゴリズムをPerlで書いてみます。<a href="/blog/20201016143424.html">バイアス</a>を更新する場合のサンプルです。<a href="/blog/20201015143424.html">重み</a>の場合も同じです。
+</p>
+<p>
+  AdamをPerlのコードで書いてみました。
 </p>
 <pre>
 # Adam
@@ -56,14 +59,14 @@ for (my $i = 0; $i &lt; 10; $i++) {
   $moment = $before_moment_weight * $moment + (1 - $before_moment_weight) * $grad;
   $velocity = $before_velocity_weight * $velocity + (1 - $before_velocity_weight) * $grad * $grad;
   
-  $moment = $moment / (1 - $before_moment_weight);
-  $velocity = $velocity / (1 - $before_velocity_weight);
+  my $cur_moment = $moment / (1 - $before_moment_weight);
+  my $cur_velocity = $velocity / (1 - $before_velocity_weight);
   
-  $biase -= ($learning_rate / sqrt($velocity + $much_small_value)) * $moment;
+  $biase -= ($learning_rate / (sqrt($cur_velocity) + $much_small_value)) * $cur_moment;
 }
 
 # 傾きを求める
-sub culc_grad {
+sub calc_grad {
   
   # 便宜的な値を返す
   my $grad = rand;
