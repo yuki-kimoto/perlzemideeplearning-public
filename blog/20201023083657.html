@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>パラメーター更新最適化アルゴリズムとは - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="パラメーター更新最適化アルゴリズムとは、重みとバイアスのパラメーターを更新する場合に、高い正答率に速く到達し、また最終的な正答率が高くなるように考えられたアルゴリズムのことです。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">Perlで学ぶディープラーニング入門</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20201023083657.html">パラメーター更新最適化アルゴリズムとは</a></h2>
+<p>
+  パラメーター更新最適化アルゴリズムとは、<a href="/blog/20201015143424.html">重み</a>と<a href="/blog/20201016143424.html">バイアス</a>のパラメーターを更新する場合に、高い正答率に速く到達し、また最終的な正答率が高くなるように考えられたアルゴリズムのことです。
+</p>
+<ul>
+  <li><a href="/blog/20201017123741.html">確率的勾配降下法 - SGD</a></li>
+</ul>
+<h3>ミニバッチSGDとは何ですか?</h3>
+<p>
+  このサイトの解説では、確率的勾配降下法に、ミニバッチSGDを含んでいますが、本来的な意味は、バッチサイズが1のものをSGDとよび、バッチサイズが複数のものを、ミニバッチSGDと呼びます。
+</p>
+<h3>勾配降下法とは何ですか?</h3>
+<p>
+  勾配降下法とは、確率的勾配降下法において、訓練データをランダムに並べ替えることを行わない方法です。
+</p>
+<p>
+  確率的の意味は、訓練データをランダムに並べかえるという意味です。
+</p>
+<h3>最急降下法とは何ですか?</h3>
+<p>
+  最急降下法とは、勾配降下法において、バッチサイズを、訓練数と同じにしたものです。
+</p>
+<p>
+  「最急降下」の意味は、誤差の指標である損失関数に対して大きな変化をもたらす(傾きが大きい)パラメーターは、その大きさに学習率を考慮した値を減算して更新するという意味です。
+</p>
+<h3>理解の仕方</h3>
+<p>
+  パラメーター更新最適化アルゴリズムの理解の仕方。
+</p>
+<h4>訓練データをランダムに並べ替えるか</h4>
+<p>
+  「確率的」という言葉で表現されます。
+</p>
+<h4>バッチサイズはいくつか</h4>
+<p>
+  バッチサイズが訓練数と同じであれば、最急降下法、バッチサイズが一つであれば、勾配降下法(SDG)、バッチサイズが複数であれば、ミニバッチSGDです。
+</p>
+<h3>バッチサイズと並列化</h3>
+<p>
+  ミニバッチSDGが優れているのは、スレッドなどを使って並列化を行うことができることです。これによって、パフォーマンスを向上させることができます。
+</p>
+<p>
+  1回の学習は、それぞれ独立しているので、傾き(勾配)の計算も独立して行うことができます。
+</p>
+<h3>ミニバッチSDGをさらに改善したパラメーター更新最適化アルゴリズム</h3>
+<p>
+  ミニバッチSDGをさらに改善したパラメータ最適化アルゴリズムがあります。
+</p>
+<ul>
+  <li>Adam</li>
+</ul>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+<h2 style="text-align:center;margin-top:50px;">Perlで学ぶディープラーニング入門のご紹介</h2>
+
+<div style="text-align:center">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/dTKY0kor50A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
