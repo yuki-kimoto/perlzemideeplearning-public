@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>Adam - SGDを改善したパラメーター更新最適化アルゴリズム - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="AdamはSGDを改善したパラメーター更新最適化アルゴリズムです。SGDにおける学習率の部分が、訓練を行う毎に更新されていくことが特徴です。ひとつ前で行った更新量を、考慮にいれるというところも特徴です。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">Perlで学ぶディープラーニング入門</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20201022083657.html">Adam - SGDを改善したパラメーター更新最適化アルゴリズム</a></h2>
+<p>
+  AdamはSGDを改善したパラメーター更新最適化アルゴリズムです。<a href="/blog/20201017123741.html">SGD</a>における学習率の部分が、訓練を行う毎に更新されていくことが特徴です。ひとつ前で行った更新量を、考慮にいれるというところも特徴です。
+</p>
+<p>
+  ひとつのパラメーターを更新する場合におけるAdamのアルゴリズムをPerlで書いてみます。意味については、よくわかりません。<a href="/blog/20201016143424.html">バイアス</a>を更新する場合のサンプルです。<a href="/blog/20201015143424.html">重み</a>の場合も同じです。
+</p>
+<pre>
+# Adam
+
+use strict;
+use warnings;
+
+# ハイパーパラメーター
+my $biase = 0.14;
+my $learning_rate = 0.001;
+my $much_small_value = 1e-8;
+my $before_moment_weight = 0.9;
+my $before_velocity_weight = 0.999;
+
+# モーメントの値
+my $moment = 0;
+
+# ヴェロシティの値
+my $velocity = 0;
+for (my $i = 0; $i &lt; 10; $i++) {
+  my $grad = calc_grad();
+  $moment = $before_moment_weight * $moment + (1 - $before_moment_weight) * $grad;
+  $velocity = $before_velocity_weight * $velocity + (1 - $before_velocity_weight) * $grad * $grad;
+  
+  $moment = $moment / (1 - $before_moment_weight);
+  $velocity = $velocity / (1 - $before_velocity_weight);
+  
+  $biase -= ($learning_rate / sqrt($velocity + $much_small_value)) * $moment;
+}
+
+# 傾きを求める
+sub culc_grad {
+  
+  # 便宜的な値を返す
+  my $grad = rand;
+  
+  return $grad;
+}
+</pre>
+<p>
+  初期値の推奨と呼ばれているものは以下です。ただしこれは、初期値であって、正答率が速く上昇し、最終的な正答率を高くするためには、最適に設定する必要があります。
+</p>
+<pre>
+my $learning_rate = 0.001;
+my $much_small_value = 1e-8;
+my $before_moment_weight = 0.9;
+my $before_velocity_weight = 0.999;
+</pre>
+<h3>Adamの式にはどのような意味があるのですか?</h3>
+<p>
+  僕には、よくわかりません。Adamによる最適化という記事がわかりやすいと感じました。
+</p>
+<ul>
+  <li><a href="https://www.renom.jp/ja/notebooks/tutorial/basic_algorithm/adam/notebook.html">Adamによる最適化</a></li>
+</ul>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+<h2 style="text-align:center;margin-top:50px;">Perlで学ぶディープラーニング入門のご紹介</h2>
+
+<div style="text-align:center">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/dTKY0kor50A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
