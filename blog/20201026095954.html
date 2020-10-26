@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>逆誤差伝播法 - バックプロパゲーション 書き始め - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="ディープラーニングにおいて、逆誤差伝播法(バックプロパゲーション)は、ソースコードを読むときに、最も理解するのが難しい部分だと思います。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">Perlで学ぶディープラーニング入門</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20201026095954.html">逆誤差伝播法 - バックプロパゲーション 書き始め</a></h2>
+<p>
+  ディープラーニングにおいて、逆誤差伝播法(バックプロパゲーション)は、ソースコードを読むときに、最も理解するのが難しい部分だと思います。
+</p>
+<p>
+  ソースコードの中に、行列を転置する部分がでてきます。微分がでてきます。入力と出力と活性化された出力と重みとバイアスが入り混じっています。最終出力と中間出力の部分では、傾きを求める式の表現が異なっています。
+</p>
+<p>
+  m入力からn出力の変換関数において、微分とはいったい、どのような操作なのだろう。高校数学ではならっていないぞ。ヤコビ行列? 結局、高度な数学の概念を理解していない限り、ディープラーニングは、理解できないのかな?
+</p>
+<p>
+  ソースコードを一目見たときに「いったい何をしているだろう?」と疑問が浮かぶと思います。
+</p>
+<p>
+  これは僕も感じたことです。ただ、ソースコードの解読を進めていったときに、Web上に書いてある情報とはかなりの違いがあることもわかってきました。
+</p>
+<p>
+  ディープラーニングは、「高校数学」と「多段の関数における傾きの求め方」と「for文の繰り返しの理解」があれば、読み解けます。行列の計算は、ソフトウェアにおけるパフォーマンスの高速化と数学的抽象化のために、行われているということがわかってきます。
+</p>
+<p>
+  ひとつの要素なら具体的に読み解ける、それが繰り返されているだけだ、その繰り返しを行列を使うと簡単に速く計算できるんだということです。
+</p>
+<p>
+  今、文系で仕事に関わる方も、AIディープラーニングについて、理解を深めたいという需要を感じています。誤解のあるまま結論を急いだ判断をしないように、AIとは何かをもう少し正しく知りたいという需要です。ただ、高度な数学的理解が、壁になって、理解するのが難しくなっているということも感じます。
+</p>
+<p>
+  Perlで学ぶディープラーニング入門は、if文とfor文と高校数学(傾きの理解)+アルファで、ディープラーニングが理解できるように、工夫されたサイトです。
+</p>
+<p>
+  (続く)
+</p>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+<h2 style="text-align:center;margin-top:50px;">Perlで学ぶディープラーニング入門のご紹介</h2>
+
+<div style="text-align:center">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/dTKY0kor50A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
