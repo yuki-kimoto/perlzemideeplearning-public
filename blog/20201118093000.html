@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- meta -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
+<link rel="stylesheet" type="text/css" href="/css/common.css">
+
+<title>Perlのディープラーニングのライブラリ - AI::MXNet - Perlで学ぶディープラーニング入門 - 基礎と実用が学べる国産AIプロダクト</title>
+<meta name="description" content="Perlのディープラーニングライブラリには、AI::MXNetがあります。C++で書かれたディープラーニングのライブラリをPerlでバインディングして利用できるようにしたものです。">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>
+  <a href="/">Perlで学ぶディープラーニング入門</a>
+</h1>
+
+      </div>
+      <div class="main">
+        <div class="content">
+          <div class="entry">
+  <div class="top">
+    <!-- top -->
+
+  </div>
+  <div class="middle">
+    <h2><a href="/blog/20201118093000.html">Perlのディープラーニングのライブラリ - AI::MXNet</a></h2>
+<p>
+  Perlのディープラーニングライブラリには、<a href="https://metacpan.org/pod/AI::MXNet">AI::MXNet</a>があります。C++で書かれたディープラーニングのライブラリをPerlでバインディングして利用できるようにしたものです。
+</p>
+<p>
+  まずは、実際にディープラーニングを試してみたいという方は、ライブラリを使うと簡単に(?)できます。ディープラーニングは深層学習とも呼ばれます。深層学習のPerlのライブラリを探している方も、AI::MXNetがそれです。
+</p>
+<h3>MXNetのAmazon AWSにおける公式サポート</h3>
+<p>
+  MXNetはAmazon AWSにおける公式サポートがあります。
+</p>
+<blockquote>
+<p>
+  柔軟性と選択肢
+</p>
+<p>
+  <b>MXNet</b>では、C++、JavaScript、Python、R、Matlab、Julia、Scala、Clojure、<b>Perl</b> といったプログラミング言語が幅広くサポートされているため、自分のすでに知っている言語で開始することができます。ただし、バックエンドではすべてのコードが C++ にコンパイルされるため、モデル構築に使用された言語にかかわりなく最大限のパフォーマンスを発揮できます。
+</p>
+<p>
+  <a href="https://aws.amazon.com/jp/mxnet/">AWS での Apache MXNet</a>
+</p>
+</blockquote>
+<p>
+  AI::MXNetは、数少ないAmazon Perlサポートのひとつです...。
+</p>
+<h3>ディープラーニングを使った画像生成のサンプル</h3>
+<p>
+  AI::MXNetの作者のSergey V. Kolychevさんの英語のブログによると、ディープラーニングを使ったイメージ生成などもできるようです。作者の方自身は、自然言語処理に関連するディープラーニングを業務で行っているようです。
+</p>
+<blockquote>
+<p>
+  この例を楽しんで、素敵な写真をたくさん作り出してほしいですね。以下は、キュウビの写真と異なる古典的な絵画から作られたサンプルスクリプトによって生成された画像です。
+</p>
+<p>
+  <a href="http://blogs.perl.org/users/sergey_kolychev/2018/07/machine-learning-in-perl-kyuubi-goes-to-a-modelzoo-during-the-starry-night.html">Machine learning in Perl: Kyuubi goes to a (Model)Zoo during The Starry Night.</a>
+</p>
+</blockquote>
+<h4>元の画像</h4>
+<p>
+  <img src="/images/aimxnet/kyuubi.jpg" width="500">
+</p>
+<h4>ディープラーニングで生成された画像</h4>
+<p>
+  ゴッホ風画風みたいなのを学習させて、オリジナル画像から生成したものでしょうか。
+</p>
+<p>
+  <img src="/images/aimxnet/kyuubi_blacksquare.jpg">
+</p>
+<p>
+  <img src="/images/aimxnet/kyuubi_dali.jpg">
+</p>
+<p>
+  <img src="/images/aimxnet/kyuubi_mural.jpg">
+</p>
+<p>
+  <img src="/images/aimxnet/kyuubi_starry.jpg">
+</p>
+<h3>AI::MXNetの使い方</h3>
+<p>
+  使い方をサンプルから紹介です。
+</p>
+<pre>
+## Convolutional NN for recognizing hand-written digits in MNIST dataset
+## It's considered "Hello, World" for Neural Networks
+## For more info about the MNIST problem please refer to L&lt;http://neuralnetworksanddeeplearning.com/chap1.html&gt;
+ 
+use strict;
+use warnings;
+use AI::MXNet qw(mx);
+use AI::MXNet::TestUtils qw(GetMNIST_ubyte);
+use Test::More tests =&gt; 1;
+ 
+# symbol net
+my $batch_size = 100;
+ 
+### model
+my $data = mx-&gt;symbol-&gt;Variable('data');
+my $conv1= mx-&gt;symbol-&gt;Convolution(data =&gt; $data, name =&gt; 'conv1', num_filter =&gt; 32, kernel =&gt; [3,3], stride =&gt; [2,2]);
+my $bn1  = mx-&gt;symbol-&gt;BatchNorm(data =&gt; $conv1, name =&gt; "bn1");
+my $act1 = mx-&gt;symbol-&gt;Activation(data =&gt; $bn1, name =&gt; 'relu1', act_type =&gt; "relu");
+my $mp1  = mx-&gt;symbol-&gt;Pooling(data =&gt; $act1, name =&gt; 'mp1', kernel =&gt; [2,2], stride =&gt;[2,2], pool_type=&gt;'max');
+ 
+my $conv2= mx-&gt;symbol-&gt;Convolution(data =&gt; $mp1, name =&gt; 'conv2', num_filter =&gt; 32, kernel=&gt;[3,3], stride=&gt;[2,2]);
+my $bn2  = mx-&gt;symbol-&gt;BatchNorm(data =&gt; $conv2, name=&gt;"bn2");
+my $act2 = mx-&gt;symbol-&gt;Activation(data =&gt; $bn2, name=&gt;'relu2', act_type=&gt;"relu");
+my $mp2  = mx-&gt;symbol-&gt;Pooling(data =&gt; $act2, name =&gt; 'mp2', kernel=&gt;[2,2], stride=&gt;[2,2], pool_type=&gt;'max');
+ 
+ 
+my $fl   = mx-&gt;symbol-&gt;Flatten(data =&gt; $mp2, name=&gt;"flatten");
+my $fc1  = mx-&gt;symbol-&gt;FullyConnected(data =&gt; $fl,  name=&gt;"fc1", num_hidden=&gt;30);
+my $act3 = mx-&gt;symbol-&gt;Activation(data =&gt; $fc1, name=&gt;'relu3', act_type=&gt;"relu");
+my $fc2  = mx-&gt;symbol-&gt;FullyConnected(data =&gt; $act3, name=&gt;'fc2', num_hidden=&gt;10);
+my $softmax = mx-&gt;symbol-&gt;SoftmaxOutput(data =&gt; $fc2, name =&gt; 'softmax');
+ 
+# check data
+GetMNIST_ubyte();
+ 
+my $train_dataiter = mx-&gt;io-&gt;MNISTIter({
+    image=&gt;"data/train-images-idx3-ubyte",
+    label=&gt;"data/train-labels-idx1-ubyte",
+    data_shape=&gt;[1, 28, 28],
+    batch_size=&gt;$batch_size, shuffle=&gt;1, flat=&gt;0, silent=&gt;0, seed=&gt;10});
+my $val_dataiter = mx-&gt;io-&gt;MNISTIter({
+    image=&gt;"data/t10k-images-idx3-ubyte",
+    label=&gt;"data/t10k-labels-idx1-ubyte",
+    data_shape=&gt;[1, 28, 28],
+    batch_size=&gt;$batch_size, shuffle=&gt;1, flat=&gt;0, silent=&gt;0});
+ 
+my $n_epoch = 1;
+my $mod = mx-&gt;mod-&gt;new(symbol =&gt; $softmax);
+$mod-&gt;fit(
+    $train_dataiter,
+    eval_data =&gt; $val_dataiter,
+    optimizer_params=&gt;{learning_rate=&gt;0.01, momentum=&gt; 0.9},
+    num_epoch=&gt;$n_epoch
+);
+my $res = $mod-&gt;score($val_dataiter, mx-&gt;metric-&gt;create('acc'));
+ok($res-&gt;{accuracy} &gt; 0.8);
+ 
+## Gluon MNIST example
+ 
+my $net = nn-&gt;Sequential();
+$net-&gt;name_scope(sub {
+    $net-&gt;add(nn-&gt;Dense(128, activation=&gt;'relu'));
+    $net-&gt;add(nn-&gt;Dense(64, activation=&gt;'relu'));
+    $net-&gt;add(nn-&gt;Dense(10));
+});
+$net-&gt;hybridize;
+ 
+# data
+sub transformer
+{
+    my ($data, $label) = @_;
+    $data = $data-&gt;reshape([-1])-&gt;astype('float32')/255;
+    return ($data, $label);
+}
+my $train_data = gluon-&gt;data-&gt;DataLoader(
+    gluon-&gt;data-&gt;vision-&gt;MNIST('./data', train=&gt;1, transform =&gt; \&amp;transformer),
+    batch_size=&gt;$batch_size, shuffle=&gt;1, last_batch=&gt;'discard'
+);
+ 
+## training
+sub train
+{
+    my ($epochs, $ctx) = @_;
+    # Collect all parameters from net and its children, then initialize them.
+    $net-&gt;initialize(mx-&gt;init-&gt;Xavier(magnitude=&gt;2.24), ctx=&gt;$ctx);
+    # Trainer is for updating parameters with gradient.
+    my $trainer = gluon-&gt;Trainer($net-&gt;collect_params(), 'sgd', { learning_rate =&gt; $lr, momentum =&gt; $momentum });
+    my $metric = mx-&gt;metric-&gt;Accuracy();
+    my $loss = gluon-&gt;loss-&gt;SoftmaxCrossEntropyLoss();
+ 
+    for my $epoch (0..$epochs-1)
+    {
+        # reset data iterator and metric at begining of epoch.
+        $metric-&gt;reset();
+        enumerate(sub {
+            my ($i, $d) = @_;
+            my ($data, $label) = @$d;
+            $data = $data-&gt;as_in_context($ctx);
+            $label = $label-&gt;as_in_context($ctx);
+            # Start recording computation graph with record() section.
+            # Recorded graphs can then be differentiated with backward.
+            my $output;
+            autograd-&gt;record(sub {
+                $output = $net-&gt;($data);
+                my $L = $loss-&gt;($output, $label);
+                $L-&gt;backward;
+            });
+            # take a gradient step with batch_size equal to data.shape[0]
+            $trainer-&gt;step($data-&gt;shape-&gt;[0]);
+            # update metric at last.
+            $metric-&gt;update([$label], [$output]);
+ 
+            if($i % $log_interval == 0 and $i &gt; 0)
+            {
+                my ($name, $acc) = $metric-&gt;get();
+                print "[Epoch $epoch Batch $i] Training: $name=$acc\n";
+            }
+        }, \@{ $train_data });
+ 
+        my ($name, $acc) = $metric-&gt;get();
+        print "[Epoch $epoch] Training: $name=$acc\n";
+ 
+        my ($val_name, $val_acc) = test($ctx);
+        print "[Epoch $epoch] Validation: $val_name=$val_acc\n"
+    }
+    $net-&gt;save_parameters('mnist.params');
+}
+ 
+train($epochs, $cuda ? mx-&gt;gpu(0) : mx-&gt;cpu);
+</pre>
+
+  </div>
+  <div class="bottom">
+    <!-- bottom -->
+
+<h2 style="text-align:center;margin-top:50px;">Perlで学ぶディープラーニング入門のご紹介</h2>
+
+<div style="text-align:center">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/dTKY0kor50A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+  </div>
+</div>
+
+        </div>
+        <div class="side">
+          <!-- side -->
+<div class="side-list">
+  <div class="side-list-title">
+    Side Bar
+  </div>
+  <ul>
+    <li><a href="/list.html">Entries</a></li>
+    <li>Bar</li>
+    <li>Baz</li>
+  </ul>
+</div>
+
+        </div>
+      </div>
+      <div class="footer">
+        <div class="kimoto_system_link">
+  <a href="https://kimoto-system.co.jp/message">
+    <img src="https://kimoto-system.co.jp/images/kimoto-system-logo.png" alt="Perl Webシステム開発">
+    Perl Webシステム開発の木本システム
+  </a>
+</div>
+
+<div class="copyright">
+  Copyright © Yuki Kimoto
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>
