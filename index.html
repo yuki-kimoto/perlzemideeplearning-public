@@ -7,15 +7,20 @@
 <link rel="icon" type="image/x-icon" href="/images/deeplearning-logo.png">
 <link rel="stylesheet" type="text/css" href="/css/common.css">
 
-<title>Perl AI・ディープラーニング入門 - AIライブラリの紹介とAIを理解するための基本を解説</title>
-<meta name="description" content="Perlで学ぶディープラーニング入門です。ディープラーニングの基礎となる数学のアルゴリズムをPerlで書きます。またPerlのディープラーニングライブラリ「AI::NXNet」を紹介します。機械学習・深層学習の基礎の数学が学べます。">
+<title>Perl深層学習AI入門</title>
+<meta name="description" content="Perl深層学習AI入門は、深層学習に必要な基礎をPerlのサンプルコードで学べる講座です。深層学習はディープラーニングとも呼ばれており高い精度を実現できる機械学習のひとつの分野です。深層学習に必要な数学的知識を、高校数学で学んでいる数学の基本的な知識だけで、学べるように工夫しています。数式をなるべく少なく、プログラムによるアルゴリズムを中心に紹介していることも特徴です。">
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <h1>
-  <a href="/">Perl AI・ディープラーニング入門</a>
-</h1>
+        <div class="header_main">
+  <h1>
+    <a href="/"><img src="/images/logo.png">Perl AI深層学習入門</a>
+  </h1>
+  <div class="header_right">
+    <a rel="nofollow" href="https://perlri.com/account/create">会員登録</a>
+  </div>
+</div>
 
       </div>
       <div class="main">
@@ -26,9 +31,9 @@
 
   </div>
   <div class="middle">
-    <h2><a href="/">Perlディープラーニング入門</a></h2>
+    <h2><a href="/">Perl深層学習AI入門</a></h2>
 <p>
-  Perlで学ぶディープラーニング入門です。ディープラーニングの基礎となる数学のアルゴリズムをPerlで書きます。またPerlのディープラーニングライブラリ「AI::NXNet」を紹介します。機械学習・深層学習の基礎の数学が学べます。
+  Perl深層学習AI入門は、深層学習に必要な基礎をPerlのサンプルコードで学べる講座です。深層学習はディープラーニングとも呼ばれており高い精度を実現できる機械学習のひとつの分野です。深層学習に必要な数学的知識を、高校数学で学んでいる数学の基本的な知識だけで、学べるように工夫しています。数式をなるべく少なく、プログラムによるアルゴリズムを中心に紹介していることも特徴です。
 </p>
 <div style="width:calc(100% - 30px);margin:0 auto;">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4525414114581084"
@@ -47,83 +52,33 @@
 
 
 <p>
-  ディープラーニングでは、計算資源を最適化することが求められるので、Perlの数値計算能力は、ディープラーニングの必要を満たさないのではないかという疑問が浮かぶと思います。
+  Perlだけで書かれているため、専用のライブラリを準備したり、学んだりしなくても学習を始められることが、このサイトの特徴です。Perlをインストールすれば、すぐに深層学習の学習を始められます。
 </p>
 <p>
-  これを解決するために、Perlのソースコードの一部をSPVMへ移植し、C言語の関数やcudaのcuBLASにバインディングして、高速化するという手法を書いていきます。SPVMは、C言語へのトランスパイラ機能とC/C++/cudaへのバインディング機能を提供するPerlのモジュールです。
+  深層学習AIを使って、実務で実践的に、画像認識、パターン認識、音声認識をしたい方のために、Perlの深層学習ライブラリ「AI::NXNet」も紹介しています。
 </p>
-<h4>ディープラーニングとは何か?</h4>
+<h3>深層学習とは</h3>
+<ul>
+  <li><a href="/blog/20210920074017.html">深層学習とは</a></li>
+</ul>
+<h3>深層学習を学ぶためのPerl環境構築</h3>
 <p>
-  ディープラーニングは、機械学習の一つの分野です。
-</p>
-<p>
-  機械学習では、入力から正しい出力を得られるように、パラメーターを自動的に調整します。パラメーターを自動的に調整する仕組みを、プログラムとして実装するので、機械的に学習が進むのです。
-</p>
-<p>
-  たとえば、入力が「人物の写真」だとして、この人は「眼鏡をかけている」「眼鏡をかけていない」というのが出力です。パターン認識と呼ばれる基本的な分野です。
-</p>
-<p>
-  眼鏡をかけているかどうかの正答率を上昇させていくことが、機械学習の目標です。
-</p>
-<p>
-  ディープラーニングは、機械学習の中でも、人間の神経伝達の仕組みを模倣した、ニューラルネットワークを利用した機械学習です。
-</p>
-<p>
-  ディープラーニングは、ニューラルネットワークの中で、深層学習と呼ばれ、複数の入力と複数の出力を、多段階に連続的につなぎ、最終的な出力を得る方法です。
-</p>
-<pre>
-人物の写真
-↓
-(x0, x1, x2, x3)
-↓
-(y0, y1, y2, y3, y4)
-↓
-(z0, z1, z2)
-↓
-(眼鏡をかけている、眼鏡をかけていない)
-</pre>
-<p>
-  実際は、x1～xnまでは、もっと長いです。y1～ykまでももっと長いです。xの個数とyの個数は異なっても構いませんし、一般的には、異なるようにします。
-</p>
-<p>
-  また、段数は、この例では、x, y, zですが、これも、もっと長くなります。
-</p>
-<p>
-  入力から、複数入力と複数出力を多段につなげていって、出力を得るというところがポイントです。
-</p>
-<p>
-  100億個のニューロンに該当するものを作るとすれば、各層のニューロン数は1億個程度、層の数は100層くらいになります。
-</p>
-<h4>数学の言葉をできるだけ使わないで解説</h4>
-<p>
-  Perlで学ぶディープラーニング入門では、数学の言葉をできるだけ使わないで解説します。
-</p>
-<p>
-  まずプログラミングのサンプルで、入力と出力を提示します。そのあとで、補助的に高校生の数学で理解できる範囲で説明します。
-</p>
-<p>
-  「えっ、そんなことができるの?」
-</p>
-<p>
-  でも、よく考えてください。
-</p>
-<p>
-  「中身、全部ソースコードじゃないですか!!!」。
-</p>
-<p>
-  「数学はわからなくっても、コードは読めるはず!!!」
-</p>
-<p>
-  やってみてからのお楽しみ。
-</p>
-<h3>Perlディープラーニングのライブラリ</h3>
-<p>
-  まずはPerlのディープラーニングのライブラリでどんなことができるか、知っておきましょう。
+  深層学習を学ぶためにPerlをインストールしましょう。Windows、Mac、Linux/UNIXに対応しています。
 </p>
 <ul>
-  <li><a href="/blog/20201118093000.html">Perlのディープラーニングのライブラリ - AI::MXNet</a></li>
+  <li><a href="https://perlzemi.com/blog/20180820153471.html">Perlのインストール</a></li>
+</ul>
+<h3>Perlの深層学習のライブラリ</h3>
+<p>
+  深層学習AIを使って、実務で実践的に、画像認識、パターン認識、音声認識をしたい方のために、Perlの深層学習ライブラリ「AI::NXNet」の紹介です。
+</p>
+<ul>
+  <li><a href="/blog/20201118093000.html">Perlの深層学習のライブラリ - AI::MXNet</a></li>
 </ul>
 <h3>基礎知識</h3>
+<p>
+  深層学習の基礎知識を学びましょう。
+</p>
 <ul>
   <li><a href="/blog/20200905120907.html">隠れ層におけるニューロンの数を表現する</a></li>
   <li><a href="/blog/20200904120907.html">エポックという単位は訓練データを一巡することを指す</a></li>
@@ -146,12 +101,12 @@
   <li><a href="/blog/20201007144439.html">Xavierの初期値</a></li>
   <li><a href="/blog/20201006144439.html">Heの初期値</a></li>
 </ul>
-<h3>ディープラーニングで使う数学</h3>
+<h3>深層学習で使う数学</h3>
 <h4>入出力</h4>
 <ul>
   <li><a href="/blog/20200302113052.html">隠れ層における計算 - m個の入力をn個の出力に変換する</a></li>
   <li><a href="/blog/20200306113052.html">出力層における計算</a></li>
-  <li><a href="/blog/20200915121719.html">ディープラーニングで初期入力から最終出力を得る計算過程</a></li>
+  <li><a href="/blog/20200915121719.html">深層学習で初期入力から最終出力を得る計算過程</a></li>
 </ul>
 <h4>ベクトル</h4>
 <ul>
@@ -203,48 +158,54 @@
   <li><a href="/blog/20201017123741.html">確率的勾配降下法(SGD) - 重みとバイアスのパラメータの更新</a></li>
   <li><a href="/blog/20201022083657.html">Adam - SGDの改善</a></li>
 </ul>
-<h3>Perl+ディープラーニングで手書き文字認識</h3>
+<h3>Perl+深層学習で手書き文字認識</h3>
 <ul>
-  <li><a href="/blog/20200908120907.html">Perl+ディープラーニングで手書き文字認識</a></li>
-  <li><a href="/blog/20200926161518.html">ピュアPerlで書いたMNIST手書き認識ディープラーニング</a></li>
+  <li><a href="/blog/20200908120907.html">Perl+深層学習で手書き文字認識</a></li>
+  <li><a href="/blog/20200926161518.html">ピュアPerlで書いたMNIST手書き認識深層学習</a></li>
 </ul>
-<h3>SPVMを使ったディープラーニング高速化</h3>
+<h3>SPVMを使った深層学習高速化</h3>
 <ul>
-  <li><a href="/blog/20210510142804.html">SPVMを使ったディープラーニング高速化</a></li>
+  <li><a href="/blog/20210510142804.html">SPVMを使った深層学習高速化</a></li>
 </ul>
-<h3>関連講座</h3>
+<h3>Perl深層学習AI入門の関連講座</h3>
+<p>
+  Perl深層学習AI入門の関連講座のご紹介。
+</p>
+<h4>Perlプロブログラミング入門</h4>
+<p>
+  Perlプログラミングの基礎を学ぶ。
+</p>
 <ul>
-  <li><a rel="nofollow" href="https://perlzemi.com/">Perlプログラミング入門</a></li>
-  <li><a rel="nofollow" href="https://c-language-perl-genki.com/">C言語入門</a></li>
-  <li><a rel="nofollow" href="https://bind.perlzemi.com/">C/C++ Perlバインディング入門</a></li>
-  <li><a rel="nofollow" href="https://datascience.perlzemi.com/">データ分析入門</a></li>
-  <li><a rel="nofollow" href="https://perlri.com/">Perl元気塾 - ゆとりあるエンジニアライフを創造中</a></li>
+  <li><a href="https://perlzemi.com/">Perlゼミ - Perlプログラミング入門</a></li>
+  <li><a href="https://www.youtube.com/channel/UCbeAS6ZXpSKqkzb-Nykb0ZQ">Perlゼミちゃんねる - Perl入門動画講義</a></li>
+</ul>
+<h4>深層学習の高速化技術</h4>
+<p>
+  深層学習の高速化技術を学ぶ。
+</p>
+<ul>
+  <li><a href="https://c-language-perl-genki.com/">Perl XSユーザーのためのC言語入門</a></li>
+  <li><a href="https://bind.perlzemi.com/">Perlバインディング入門 - C/C++/CudaをPerlから呼び出す</a></li>
+</ul>
+<h4>データ分析</h4>
+<p>
+  データ分析は、深層学習AIとは、直接の関連性はありませんが、世間では誤解され、関連性が高いものとして紹介されています。「ビッグデータ」「AI」という言葉がバズワードとして、情報の表面に流通しており、投資詐欺の可能性が高いものがありますので、ご注意ください。実際のデータ分析を知って、誤解を解ければと願います。
+</p>
+<ul>
+  <li><a href="https://datascience.perlzemi.com/">データ分析入門</a></li>
+</ul>
+<h4>仲間との交流</h4>
+<p>
+  Perlクラブでは、Perl仲間と交流したり、質問ができたりするフォーラムをご用意しています。Perlに関することであれば、どんな内容でも、お気軽にご参加ください。
+</p>
+<ul>
+  <li><a href="https://perlri.com/">Perlクラブ - 仲間と出会いゆとりあるエンジニアライフを送る</a></li>
 </ul>
 
   </div>
   <div class="bottom">
-    <!-- bottom -->
-
-<h3>AI・ディープラーニング入門の概要を動画で紹介中</h3>
-
-<div class="youtube_block">
-  <div class="youtube">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/dTKY0kor50A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-</div>
-
-<div style="width:calc(100% - 30px);margin:0 auto;">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4525414114581084"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-gw-3+1f-3d+2z"
-     data-ad-client="ca-pub-4525414114581084"
-     data-ad-slot="6080873486"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+    <div class="perlclub_register">
+  <a rel="nofollow" href="https://perlri.com/account/create">Perlクラブへの<br>無料の会員登録で<br>書籍サンプルプレゼント</a>
 </div>
 
   </div>
@@ -252,51 +213,55 @@
 
         </div>
         <div class="side">
-          <!-- side -->
-<div class="side_list">
+          <div class="side_list">
   <div class="side_list_title">
-    AI講座 講座作成
-  </div>
-  <ul>
-    <li style="text-align:center;padding-left:0"><a rel="nofollow" href="http://www.perlri.com/"><img width="110" src="https://tutorial.perlzemi.com/images/kaeru_w_01.png"><br>ゆとりある<br>エンジニアライフを創造中<br>Perl元気塾</a></li>
-  </ul>
-</div>
-
-<div class="side_list">
-  <div class="side_list_title">
-    AI講座 記事一覧
-  </div>
-  <ul>
-    <li><a href="/list.html">記事一覧</a></li>
-  </ul>
-</div>
-
-<div class="side_list">
-  <div class="side_list_title">
-    プロのITエンジニアになる方法
+    Perlテキスト処理のエッセンス
   </div>
   <div class="side_list_body">
     <ul>
       <li>
-        <div style="text-align:center;margin-bottom:5px;">
-          <a rel="nofollow" href="https://perlri.com/job" target="_blank">プロのITエンジニアになるための<br>仕事の探し方・選び方</a>
+        <div class="side_list_image">
+          <a rel="nofollow" href="https://perlri.com/book/perl_text_essense"><img src="https://perlri.com/images/book/perl_text_essence/perl_text_essence.jpg"></a>
         </div>
-<!-- サイドバー -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4525414114581084"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="fluid"
-     data-ad-layout-key="-gw-3+1f-3d+2z"
-     data-ad-client="ca-pub-4525414114581084"
-     data-ad-slot="6384959968"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>        <!-- 
-        <div>
-          <img src="/images/ad/ad_image_example.png">
+        <div class="side_list_description">
+          <div >初級者向け・テキスト処理と正規表現の基本をマスター</div>
         </div>
-        -->
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="side_list">
+  <div class="side_list_title">
+    業務に役立つPerl
+  </div>
+  <div class="side_list_body">
+    <ul>
+      <li>
+        <div class="side_list_image">
+          <a  rel="nofollow" href="https://perlri.com/book/perl_gyoumu"><img src="https://perlri.com/images/book/perl_gyoumu/perl_gyoumu.jpg"></a>
+        </div>
+        <div class="side_list_description">
+          実務者向け・ログ解析など日本語を含むテキスト処理の実践!
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="side_list">
+  <div class="side_list_title">
+    Perlクラブ
+  </div>
+  <div class="side_list_body">
+    <ul>
+      <li>
+        <div class="side_list_image">
+          <a rel="nofollow" href="http://perlri.com/"><img style="width:130px" src="https://perlri.com/images/perl_club_logo.png"></a>
+        </div>
+        <div class="side_list_description">
+          仲間と出会い<br>ゆとりあるエンジニアライフを送る
+        </div>
       </li>
     </ul>
   </div>
@@ -305,20 +270,16 @@
         </div>
       </div>
       <div class="footer">
-        <div class="what_is_this_site">
-  <div class="inside">
-    <b>ディープラーニングを使ったAI</b>を<a rel="nofollow" href="https://tutorial.perlzemi.com/">Perl</a>で学ぶ講座です。ライブラリを使わずに、if文とfor文とソフトウェアと数学の基本的な知識(高度なものではなく)があれば、学べるように構成しています。<br>実用においては、ディープラーニングのC++で書かれたMXNetライブラリの機能をPerlから呼び出せる、<a rel="nofollow" href="https://metacpan.org/pod/AI::MXNet">AI::MXNet</a>というモジュールによって提供されています。AI::MXNetは、画像判別、自然言語処理、画像生成などのディープラーニングの応用にも対応しています。<br>Perlでは、数値計算や配列演算の性能が足りない場合は、<a rel="nofollow" href="https://c.perlzemi.com/">C言語</a>やC++で書かれたライブラリを<a rel="nofollow" href="https://bind.perlzemi.com/">バインディング</a>できます。<br>誤解が多いですが、<a rel="nofollow" href="https://datascience.perlzemi.com/">データ分析</a>においては、ディープラーニングによるAI(あるいは学習アルゴリズム)は、非常に限られた分野での応用で、精度が高くなる場合は限定されています。
-  </div>
-</div>
-
-<div class="perlri_link">
-  <a rel="nofollow" href="http://www.perlri.com">
-    ゆとりある<br>エンジニアライフを創造中<br>Perl元気塾
+        <div class="perlri_link">
+  <a rel="nofollow" href="http://perlri.com">
+    仲間と出会い<br>ゆとりあるエンジニアライフを送る<br>Perlクラブ
   </a>
 </div>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4525414114581084"
      crossorigin="anonymous"></script>
+     
+     
       </div>
     </div>
   </body>
